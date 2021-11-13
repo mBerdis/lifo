@@ -10,6 +10,8 @@ public class Main
     static ArrayList<String[]> map = new ArrayList<String[]>();
     static int[] startPoint;
     static int[] currentPoint;
+    static int roomCounter = 0;
+    static boolean keyFound = false;
 
     public static void main(String[] args)
     {
@@ -35,26 +37,59 @@ public class Main
 
         while(true)
         {
+            if (keyFound && currentPoint == startPoint)
+            {
+                System.out.println("___________________________");
+                System.out.println("__________YOU WON__________");
+                System.out.println("___________________________");
+                System.exit(0);
+            }
+
             ArrayList<String> options = getOptions();
-            System.out.println(Arrays.toString(options.toArray()));
+            System.out.println("ROOM no. " + roomCounter + ", OPTIONS > " + Arrays.toString(options.toArray()));
             String choice = sc.nextLine();
 
             switch (choice)
             {
                 case "SEVER":
-                    if (options.contains("SEVER")) currentPoint[0] = currentPoint[0] - 1;
+                    if (options.contains("SEVER"))
+                    {
+                        currentPoint[0] = currentPoint[0] - 1;
+                        roomCounter += 1;
+                    }
                     else System.err.println("WRONG MOVE");
                     break;
                 case "VYCHOD":
-                    if (options.contains("VYCHOD")) currentPoint[1] = currentPoint[1] + 1;
+                    if (options.contains("VYCHOD"))
+                    {
+                        currentPoint[1] = currentPoint[1] + 1;
+                        roomCounter += 1;
+                    }
                     else System.err.println("WRONG MOVE");
                     break;
                 case "JUH":
-                    if (options.contains("JUH")) currentPoint[0] = currentPoint[0] + 1;
+                    if (options.contains("JUH"))
+                    {
+                        currentPoint[0] = currentPoint[0] + 1;
+                        roomCounter += 1;
+                    }
                     else System.err.println("WRONG MOVE");
                     break;
                 case "ZAPAD":
-                    if (options.contains("ZAPAD")) currentPoint[1] = currentPoint[1] - 1;
+                    if (options.contains("ZAPAD"))
+                    {
+                        currentPoint[1] = currentPoint[1] - 1;
+                        roomCounter += 1;
+                    }
+                    else System.err.println("WRONG MOVE");
+                    break;
+                case "NAVRAT":
+                    if (options.contains("NAVRAT"))
+                    {
+                        // TODO implement LIFO
+                        // TODO go back
+                        roomCounter -=1;
+                    }
                     else System.err.println("WRONG MOVE");
                     break;
                 default:
@@ -80,9 +115,10 @@ public class Main
         ArrayList<String> options = new ArrayList<>();
 
         // reset values to common ground so you can then calculate door that room has
-        if (room > 32)
+        if (room >= 32)
         {
-            // TODO mas kluc
+            keyFound = true;
+            System.out.println("YOU HAVE FOUND THE KEY");
             room -= 32;
         }
         else if (room > 16)
@@ -110,6 +146,8 @@ public class Main
             options.add("SEVER");
             room -= 1;
         }
+
+        if (roomCounter != 0) options.add("NAVRAT");
 
         return options;
     }
@@ -144,17 +182,6 @@ public class Main
 
     public static int[] findStart()
     {
-//        for (String[] line: map)
-//        {
-//            for (String room: line)
-//            {
-//                if (Integer.parseInt(room) > 16 && Integer.parseInt(room) < 32)
-//                {
-//                    return
-//                }
-//            }
-//        }
-
         for (int i = 0; i < map.size(); i++)
         {
             for (int j = 0; j < map.get(i).length; j++)

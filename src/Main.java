@@ -35,12 +35,36 @@ public class Main
 
         while(true)
         {
-            getOptions();
+            ArrayList<String> options = getOptions();
+            System.out.println(Arrays.toString(options.toArray()));
             String choice = sc.nextLine();
+
+            switch (choice)
+            {
+                case "SEVER":
+                    if (options.contains("SEVER")) currentPoint[0] = currentPoint[0] - 1;
+                    else System.err.println("WRONG MOVE");
+                    break;
+                case "VYCHOD":
+                    if (options.contains("VYCHOD")) currentPoint[1] = currentPoint[1] + 1;
+                    else System.err.println("WRONG MOVE");
+                    break;
+                case "JUH":
+                    if (options.contains("JUH")) currentPoint[0] = currentPoint[0] + 1;
+                    else System.err.println("WRONG MOVE");
+                    break;
+                case "ZAPAD":
+                    if (options.contains("ZAPAD")) currentPoint[1] = currentPoint[1] - 1;
+                    else System.err.println("WRONG MOVE");
+                    break;
+                default:
+                    System.err.println("WRONG MOVE");
+                    break;
+            }
         }
     }
 
-    public static void getOptions()
+    public static ArrayList<String> getOptions()
     {
         /*
         Vysvetlivky:
@@ -53,6 +77,7 @@ public class Main
         */
 
         int room = Integer.parseInt(map.get(currentPoint[0])[currentPoint[1]]);
+        ArrayList<String> options = new ArrayList<>();
 
         // reset values to common ground so you can then calculate door that room has
         if (room > 32)
@@ -67,29 +92,26 @@ public class Main
 
         if (room >= 8)
         {
-            // TODO dvere na zapad
-            System.out.println("ZAPAD");
+            options.add("ZAPAD");
             room -= 8;
         }
         if (room >= 4)
         {
-            // TODO dvere na juh
-            System.out.println("JUH");
+            options.add("JUH");
             room -= 4;
         }
         if (room >= 2)
         {
-            // TODO dvere na vychod
-            System.out.println("VYCHOD");
+            options.add("VYCHOD");
             room -= 2;
         }
         if (room >= 1)
         {
-            // TODO dvere na sever
-            System.out.println("SEVER");
+            options.add("SEVER");
             room -= 1;
         }
 
+        return options;
     }
 
     public static void loadMap()

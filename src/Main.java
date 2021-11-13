@@ -9,6 +9,7 @@ import java.util.List;
 public class Main
 {
     static ArrayList<String[]> map = new ArrayList<String[]>();
+    static int[] startPoint;
 
     public static void main(String[] args)
     {
@@ -19,6 +20,8 @@ public class Main
     {
         loadMap();
         showMap();
+        startPoint = findStart();
+        System.out.println(Arrays.toString(startPoint));
     }
 
     public static void loadMap()
@@ -58,6 +61,33 @@ public class Main
         {
             System.out.println(Arrays.toString(line));
         }
+    }
+
+    public static int[] findStart()
+    {
+//        for (String[] line: map)
+//        {
+//            for (String room: line)
+//            {
+//                if (Integer.parseInt(room) > 16 && Integer.parseInt(room) < 32)
+//                {
+//                    return
+//                }
+//            }
+//        }
+
+        for (int i = 0; i < map.size(); i++)
+        {
+            for (int j = 0; j < map.get(i).length; j++)
+            {
+                if (Integer.parseInt(map.get(i)[j]) > 16 && Integer.parseInt(map.get(i)[j]) < 32)
+                {
+                    return new int[]{i, j};
+                }
+            }
+        }
+
+        return null;
     }
 
 }

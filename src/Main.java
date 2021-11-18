@@ -12,6 +12,7 @@ public class Main
     static int[] currentPoint;
     static int roomCounter = 0;
     static boolean keyFound = false;
+    static LIFO lifo = new LIFO(2048);
 
     public static void main(String[] args)
     {
@@ -37,7 +38,7 @@ public class Main
 
         while(true)
         {
-            if (keyFound && currentPoint == startPoint)
+            if (keyFound && currentPoint[0] == startPoint[0] && currentPoint[1] == startPoint[1])
             {
                 System.out.println("___________________________");
                 System.out.println("__________YOU WON__________");
@@ -54,6 +55,7 @@ public class Main
                 case "SEVER":
                     if (options.contains("SEVER"))
                     {
+                        lifo.push("SEVER");
                         currentPoint[0] = currentPoint[0] - 1;
                         roomCounter += 1;
                     }
@@ -62,6 +64,7 @@ public class Main
                 case "VYCHOD":
                     if (options.contains("VYCHOD"))
                     {
+                        lifo.push("VYCHOD");
                         currentPoint[1] = currentPoint[1] + 1;
                         roomCounter += 1;
                     }
@@ -70,6 +73,7 @@ public class Main
                 case "JUH":
                     if (options.contains("JUH"))
                     {
+                        lifo.push("JUH");
                         currentPoint[0] = currentPoint[0] + 1;
                         roomCounter += 1;
                     }
@@ -78,6 +82,7 @@ public class Main
                 case "ZAPAD":
                     if (options.contains("ZAPAD"))
                     {
+                        lifo.push("ZAPAD");
                         currentPoint[1] = currentPoint[1] - 1;
                         roomCounter += 1;
                     }
@@ -86,9 +91,15 @@ public class Main
                 case "NAVRAT":
                     if (options.contains("NAVRAT"))
                     {
-                        // TODO implement LIFO
-                        // TODO go back
+                        String previousMove = lifo.pop();
                         roomCounter -=1;
+                        switch (previousMove)
+                        {
+                            case "SEVER": currentPoint[0] = currentPoint[0] + 1; break;
+                            case "JUH": currentPoint[0] = currentPoint[0] - 1; break;
+                            case "VYCHOD": currentPoint[1] = currentPoint[1] - 1; break;
+                            case "ZAPAD": currentPoint[1] = currentPoint[1] + 1; break;
+                        }
                     }
                     else System.err.println("WRONG MOVE");
                     break;

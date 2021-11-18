@@ -35,8 +35,8 @@ public class LIFO
         }
         else
         {
-             top--;
-             return LIFO[top+1];
+            top--;
+            return LIFO[top+1];
         }
     }
 

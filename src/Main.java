@@ -27,7 +27,7 @@ public class Main
         startPoint = findStart();
         System.out.println("START > " + Arrays.toString(startPoint));
 
-        currentPoint = startPoint;
+        currentPoint = startPoint.clone();
 
         gameplayLoop();
     }

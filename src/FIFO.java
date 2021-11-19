@@ -47,12 +47,12 @@ public class FIFO
         }
         else
         {
+            String res = "[ ";
             if (head != tail)
             {
-
                 while (currIndex != head)
                 {
-                    System.out.print(FIFO[currIndex] + " ");
+                    res += FIFO[currIndex] +", ";
                     currIndex = increment(currIndex);
                 }
             }
@@ -60,12 +60,13 @@ public class FIFO
             {
                 do
                 {
-                    System.out.print(FIFO[currIndex] + " ");
+                    res += FIFO[currIndex] +", ";
                     currIndex = increment(currIndex);
                 }
                 while (currIndex != head);
             }
-            System.out.println();
+            res+= "]";
+            System.out.println("Obsah: " +res);
         }
     }
 

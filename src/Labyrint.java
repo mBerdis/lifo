@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main
+public class Labyrint
 {
     static ArrayList<String[]> map = new ArrayList<String[]>();
     static int[] startPoint;

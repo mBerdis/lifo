@@ -2,6 +2,7 @@ public class Node
 {
     String hodnota;
     Node next;
+    Node first;
 
     public Node(String hodnota)
     {

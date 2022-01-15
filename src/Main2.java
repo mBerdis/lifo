@@ -12,13 +12,13 @@ public class Main2
         System.out.println(list.getList());
         list.prepend("last");
         System.out.println(list.getList());
-        Node index1 = list.getNode(1);
+        Node index1 = list.getNodeByIndex(1);
         System.out.println(index1.hodnota);
         list.setValue(1,"AAAA");
         System.out.println(list.getList());
-        list.delete("AAAA");
+        list.deleteByValue("AAAA");
         System.out.println(list.getList());
-        list.delete("last");
+        list.deleteByValue("last");
         System.out.println(list.getList());
     }
 }
